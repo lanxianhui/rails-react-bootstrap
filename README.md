@@ -26,7 +26,7 @@ Downsides:
 
 Becuse of those, I might consider [Lotus Framework](http://lotusrb.org/) after it gets stable release.
 
-### PostgreSQL as default database:
+### PostgreSQL as default database
 
 * After using MySQL for few years, I experienced a [lot of quirs](http://grimoire.ca/mysql/choose-something-else).
 * PostgreSQL is [well-supported by Rails](http://blog.remarkablelabs.com/2012/12/a-love-affair-with-postgresql-rails-4-countdown-to-2013), most noticeably hstore.
@@ -37,6 +37,17 @@ Becuse of those, I might consider [Lotus Framework](http://lotusrb.org/) after i
 Downsides:
 
 * Currently there is no good, and free postgresql client for Mac. The ones I am aware of are pgAdmin, Navicat and PG Commander, and pgXplorer.
+
+### Put ruby version in Gemfile
+
+* It forces developers to use the same environment for application.
+* Prevents application to run with different ruby version in production / staging.
+* Use could .rbenv-version or .ruby-version file, but I don't find it good solution because it forces patch version of ruby, what can be cumbersome for collaborating developers. In practice there's not difference which patch version of ruby, so we shound not be forced to install 2.0.0-p247 if we have 2.0.0-p195 installed.
+
+Downsides:
+
+* You can't easily use different ruby version on development. For example you want to use Ruby 2.0.0 for faster execution and Ruby 1.9.3 on server. I think you shouldn't do that because it can introduce production-only bugs.
+* You have to upgrade production to use ruby 2.0.0. It can be cumbersome, but definitely rewarding in long run.
 
 ## License
 
