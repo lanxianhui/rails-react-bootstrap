@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: rails-react-bootstrap_development
+
+test:
+  <<: *default
+  database: rails-react-bootstrap_test
+
+production:
+  url: <%= ENV['DATABASE_URL'] %>
