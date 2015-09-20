@@ -49,6 +49,11 @@ Downsides:
 * You can't easily use different ruby version on development. For example you want to use Ruby 2.0.0 for faster execution and Ruby 1.9.3 on server. I think you shouldn't do that because it can introduce production-only bugs.
 * You have to upgrade production to use ruby 2.0.0. It can be cumbersome, but definitely rewarding in long run.
 
+### Use DATABASE_URL in production, instead database.yml config
+
+* It is recommended for [12-factor applications](http://12factor.net/)
+* It is common practice anyway
+
 ## License
 
 As Rails, this project is [MIT-licensed](http://opensource.org/licenses/mit-license.php).
