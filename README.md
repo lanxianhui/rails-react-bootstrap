@@ -38,7 +38,7 @@ Downsides:
 
 * Currently there is no good, and free postgresql client for Mac. The ones I am aware of are pgAdmin, Navicat and PG Commander, and pgXplorer.
 
-### Put ruby version in Gemfile
+### Ruby version in Gemfile
 
 * It forces developers to use the same environment for application.
 * Prevents application to run with different ruby version in production / staging.
@@ -49,11 +49,25 @@ Downsides:
 * You can't easily use different ruby version on development. For example you want to use Ruby 2.0.0 for faster execution and Ruby 1.9.3 on server. I think you shouldn't do that because it can introduce production-only bugs.
 * You have to upgrade production to use ruby 2.0.0. It can be cumbersome, but definitely rewarding in long run.
 
-### Don't user server-side templating languages or ruby helpers
+### Prevent server-side templating languages or ruby helpers
 
 It includes: [Slim](http://slim-lang.com/), [Haml](http://haml.info/), or even [ERB](http://apidock.com/ruby/ERB). Though beautiful they make it harder to create [universal](https://medium.com/@mjackson/universal-javascript-4761051b7ae9) (isomorphic) applications that can be rendered on both server-side and client-side. Universal applications make it easy to reason about front-end and back-end, develop them, and test them separately.
 
 To achieve it, all rendering needs to happen either in browser, or in helper `node` process on the server-side. All such process needs is data to render: `view = render(data)`. The data can be passed directly or queried through an API: `data = query(params)`. All to all: `view = render(query(params))`.
+
+### Use RSpec for server-side tests
+
+* It is the most popular testing framework in the Rails world
+* In my experience RSpec compared to Minitest doesn't require as much configuration (<del>Minitest</del>)
+* BDD-like commands [put you in different mindset](http://programmers.stackexchange.com/questions/135218/what-is-the-difference-between-writing-test-cases-for-bdd-and-tdd) (<del>Riot</del>, <del>Test-Unit</del>)
+* It comes with lot of integrations, including editors like vim ( <del>Bacon</del>)
+* Great support for mocks and stubs (<del>Test::Unit</del>, <del>Bacon</del>, <del>Riot</del>)
+
+## Acknowledged downsides
+
+* Tests can run slower than in other frameworks. It prevent this you should try to [isolate your tests](https://www.destroyallsoftware.com/screencasts/catalog/test-isolation-and-refactoring).
+* Weird matchers (`42.should eq(42)`). The solution is to use `wrong` plugin, which allows you to write verbose tests like `assert { 42 == 42 }`.
+* One can argue that Minitest has similar capabilities, but is much faster. I think it's really subjective matter, but for me RSpec is more pleasurable. Maybe I'll include Minitest as branch for this repository.
 
 ### Use DATABASE_URL in production, instead database.yml config
 
